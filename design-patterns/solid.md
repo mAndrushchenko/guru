@@ -255,17 +255,24 @@ class VideoPlayer implements VideoPlayer {
 перевикористовувати та комбінувати без зайвих залежностей.
 
 ```tsx
+interface IUser {
+  avatar: string;
+  name: string;
+  email: string;
+  phoneNumber: number;
+}
+
 // UserAvatar.js
-const UserAvatar = ({ src }) => <img src={src} alt="User Avatar" />;
+const UserAvatar = ({ avatar }: Pick<IUser, 'avatar'>) => <img src={avatar} alt="User Avatar" />;
 
 // UserName.js
-const UserName = ({ name }) => <h1>{name}</h1>;
+const UserName = ({ name }: Pick<IUser, 'name'>) => <h1>{name}</h1>;
 
 // UserEmail.js
-const UserEmail = ({ email }) => <p>{email}</p>;
+const UserEmail = ({ email }: Pick<IUser, 'email'>) => <p>{email}</p>;
 
 // UserProfile.js
-const UserProfile = ({ user }) => (
+const UserProfile = ({ user }: Omit<IUser, 'phoneNumber'>) => (
   <div>
     <UserAvatar src={user.avatar} />
     <UserName name={user.name} />
