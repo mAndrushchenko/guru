@@ -96,3 +96,43 @@ class AmericanMealFactory {
     }
 }
 ```
+
+### Singleton (Одинак)
+
+**Одинак** — це породжувальний патерн проектування, який гарантує, що клас має лише один екземпляр, та надає глобальну точку доступу до нього.
+
+```tsx
+class ConfigurationManager {
+  private static instance: ConfigurationManager;
+  private configurations: { [key: string]: any };
+
+  private constructor() {
+    this.configurations = {};
+  }
+
+  public static getInstance(): ConfigurationManager {
+    if (!ConfigurationManager.instance) {
+      ConfigurationManager.instance = new ConfigurationManager();
+    }
+    return ConfigurationManager.instance;
+  }
+
+  public setConfig(key: string, value: any) {
+    this.configurations[key] = value;
+  }
+
+  public getConfig(key: string): any {
+    return this.configurations[key];
+  }
+}
+
+// Usage
+const configManager1 = ConfigurationManager.getInstance();
+configManager1.setConfig("apiKey", "abc123");
+
+const configManager2 = ConfigurationManager.getInstance();
+console.log(configManager2.getConfig("apiKey")); // Output: abc123
+
+// Both instances refer to the same object
+console.log(configManager1 === configManager2); // Output: true
+```
