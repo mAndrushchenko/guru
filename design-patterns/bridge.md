@@ -165,14 +165,14 @@ appThemeForWindows.applyTheme(); // Applying Light Theme for Windows.
 appThemeForMac.applyTheme(); // Applying Dark Theme for macOS.
 ```
 **React**
-```jsx
+```tsx
 import { useState, useEffect } from 'react';
 
 //useData  is a custom hook that acts as the bridge between your application and the data fetching implementation
-export const useData = (url, method = 'GET') => {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+export const useData = (url: string, method: string = 'GET') => {
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -213,7 +213,7 @@ export const ExampleComponent = () => {
 
   return (
     <ul>
-      {data.map((item) => <li> { item.name } </li>)}
+      {data.map((item: any) => <li key={item.id}>{item.name}</li>)}
     </ul>
   );
 };
